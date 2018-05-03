@@ -1,0 +1,30 @@
+{
+  "name": "ryo-token",
+  "version": "1.0.0",
+  "description": "Smart contract code for RYO token",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "nodejs": "0.0.0",
+    "npm": "6.0.0",
+    "openzeppelin-solidity": "1.9.0",
+    "solc": "0.4.23",
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanzoai/ryo-token.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hanzoai/ryo-token/issues"
+  },
+  "homepage": "https://github.com/hanzoai/ryo-token#readme"
+}
