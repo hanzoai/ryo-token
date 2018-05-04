@@ -3,21 +3,20 @@ pragma solidity ^0.4.4;
 import "./Administratable.sol";
 
 contract Upgradeable is Administratable {
-    event Upgrade(address indexed predecessor, address indexed successor,
-                  string methods);
+    event Upgrade(address indexed predecessor, address indexed successor);
 
     address public currentVersion;
     address public predecessor;
 
-    constructor() { }
+    constructor () public { }
     // Update current version and store method configurations
-    function setVersion(address successor, string methods) public onlyAdmins {
+    function setVersion(address successor) public onlyAdmins {
         predecessor = currentVersion;
         currentVersion = successor;
-        emit Upgrade(predecessor, successor, methods);
+        emit Upgrade(predecessor, successor);
     }
 
-    function () payable {
+    function () payable public {
         // Require successfull delegate call
         require(currentVersion.delegatecall(msg.data));
         assembly {
