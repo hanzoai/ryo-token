@@ -2,17 +2,17 @@ let Master = artifacts.require('TestMaster')
 let Library = artifacts.require('TestLibrary')
 
 contract('Upgradeable', async (accounts) => {
+  // Setup master/library contracts
+  let master = await Master.deployed()
+  let library = await Library.deployed()
+  await master.setVersion(library.address)
+
   it('should upgrade version correctly', async ()=> {
-    let master = await Master.deployed()
-    let library = await Library.deployed()
-    await master.setVersion(library.address)
     let version = await master.currentVersion.call()
     assert(version === library.address, 'Version is set to latest')
   })
+
   it('should allow proxied methods', async ()=> {
-    let master = await Master.deployed()
-    let library = await Library.deployed()
-    await master.setVersion(library.address)
     let proxy = await Library.at(master.address)
     let staticString = await proxy.staticString.call()
     assert(staticString === "bar", 'Unable to call staticString on upgradable contract')
