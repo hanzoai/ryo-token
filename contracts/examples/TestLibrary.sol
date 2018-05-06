@@ -7,9 +7,18 @@ contract TestLibrary {
     function staticString() public pure returns (string) {
         return "bar";
     }
+    // Fun note. This will return outside of the blockchain with all the
+    // characters in the address lowercased. The difference is harmless, as
+    // case sensitivity isn't a thing for addresses, but .toLower() is implicit
+    // here.
     function staticAddress() public pure returns (address) {
         return testAddress;
     }
+
+    // In Javascript, this ends up becoming a BigNumber object to deal with all
+    // of the potential numeric returns from the blockchain. Check this stack
+    // exchange question for more info:
+    // https://ethereum.stackexchange.com/questions/7656/what-are-c-e-and-s-properties-in-message-call-return-object
     function staticNumber() public pure returns (uint) {
         return 420;
     }
@@ -18,6 +27,9 @@ contract TestLibrary {
     // for all matters external to Solidity. The integer type used is just
     // large enough to hold all enum values, i.e. if you have more values,
     // `uint16` will be used and so on. The indexing starts from 0.
+    // As a corrolary, because they're returned as numbers, in Javascript they
+    // also become BigNumber objects as well. See the stack exchange link
+    // above.
     function staticChoice() public pure returns (Choices) {
         return Choices.TooSlow;
     }
@@ -34,6 +46,10 @@ contract TestLibrary {
 
     function staticTwoNumbers() public pure returns (uint, uint) {
         return (420, 404);
+    }
+
+    function staticMixed() public pure returns (uint, string) {
+        return (420, "bar");
     }
 
     // Compiler complains that this method signature "doesn't exist or not

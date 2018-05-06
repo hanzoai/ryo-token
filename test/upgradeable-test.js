@@ -31,5 +31,8 @@ contract('Upgradeable', async (accounts) => {
     let staticTwoNumbers = await proxy.staticTwoNumbers.call()
     assert(staticTwoNumbers[0].toNumber() === 420, 'Failed to receive first element on staticTwoNumbers on upgradable contract')
     assert(staticTwoNumbers[1].toNumber()  === 404, 'Failed to receive second element on staticTwoNumbers on upgradable contract')
+    let staticMixed = await proxy.staticMixed.call()
+    assert(staticMixed[0].toNumber() === 420, 'Failed to receive first element on staticMixed on upgradable contract')
+    assert(staticMixed[1]  === "bar", 'Failed to receive second element on staticMixed on upgradable contract')
   })
 })
