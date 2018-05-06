@@ -26,5 +26,16 @@
   "bugs": {
     "url": "https://github.com/hanzoai/ryo-token/issues"
   },
-  "homepage": "https://github.com/hanzoai/ryo-token#readme"
+  "homepage": "https://github.com/hanzoai/ryo-token#readme",
+  "eslintConfig": {
+    "env": {
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 8
+    },
+    "rules": {
+        "semi": [2, "never"]
+    }
+  }
 }
