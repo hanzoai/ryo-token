@@ -10,7 +10,7 @@
     "nodejs": "0.0.0",
     "npm": "6.0.0",
     "openzeppelin-solidity": "1.9.0",
-    "solc": "0.4.23",
+    "solc": "0.4.23"
   },
   "devDependencies": {},
   "scripts": {
