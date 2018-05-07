@@ -11,7 +11,7 @@ interface Version {
 
 
 contract Versioned is Owned, Proxy {
-    event Upgrade(string indexed version, address indexed predecessor, address indexed successor);
+    event Upgrade(string version, address indexed predecessor, address indexed successor);
 
     // Update current version and store method configurations
     function setVersion(Version successor) public onlyOwner {
