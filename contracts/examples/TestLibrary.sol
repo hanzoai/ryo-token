@@ -1,18 +1,21 @@
-pragma solidity ^0.4.4;
+pragma solidity 0.4.21;
+
 
 contract TestLibrary {
-    address constant private testAddress = 0xdCad3a6d3569DF655070DEd06cb7A1b2Ccd1D3AF;
-    address constant private anotherAddress = 0x1C68f4f35AC5239650333D291E6ce7f841149937;
+    address constant private TEST_ADDRESS = 0xdCad3a6d3569DF655070DEd06cb7A1b2Ccd1D3AF;
+    address constant private ANOTHER_ADDRESS = 0x1C68f4f35AC5239650333D291E6ce7f841149937;
     enum Choices {UpHigh, DownLow, TooSlow}
+
     function staticString() public pure returns (string) {
         return "bar";
     }
+
     // Fun note. This will return outside of the blockchain with all the
     // characters in the address lowercased. The difference is harmless, as
     // case sensitivity isn't a thing for addresses, but .toLower() is implicit
     // here.
     function staticAddress() public pure returns (address) {
-        return testAddress;
+        return TEST_ADDRESS;
     }
 
     // In Javascript, this ends up becoming a BigNumber object to deal with all
@@ -22,6 +25,7 @@ contract TestLibrary {
     function staticNumber() public pure returns (uint) {
         return 420;
     }
+
     // Since enum types are not part of the ABI, the signature of "getChoice"
     // will automatically be changed to "staticChoice() returns (uint8)"
     // for all matters external to Solidity. The integer type used is just
@@ -41,7 +45,7 @@ contract TestLibrary {
     }
 
     function staticTwoAddresses() public pure returns (address, address) {
-        return (testAddress, anotherAddress);
+        return (TEST_ADDRESS, ANOTHER_ADDRESS);
     }
 
     function staticTwoNumbers() public pure returns (uint, uint) {
@@ -55,8 +59,7 @@ contract TestLibrary {
     // Compiler complains that this method signature "doesn't exist or not
     // unique". So - returning two enums from a function isn't possible right
     // now. Go figure.
-    /* function staticTwoChoices() public pure returns (Choice, Choice) {
-        return (Choices.UpHigh, Choices.DownLow);
-    } */
-
+    // function staticTwoChoices() public pure returns (Choice, Choice) {
+    //     return (Choices.UpHigh, Choices.DownLow);
+    // }
 }

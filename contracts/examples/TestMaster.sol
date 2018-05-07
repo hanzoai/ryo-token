@@ -1,7 +1,8 @@
-pragma solidity ^0.4.4;
+pragma solidity 0.4.21;
 
 import "../Upgradeable.sol";
 
-contract TestMaster is Upgradeable {
 
-}
+// solium-disable
+// solhint-disable
+contract TestMaster is Upgradeable {}

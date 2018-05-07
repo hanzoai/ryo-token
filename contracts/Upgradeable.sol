@@ -1,6 +1,7 @@
-pragma solidity ^0.4.4;
+pragma solidity 0.4.21;
 
 import "./Administratable.sol";
+
 
 contract Upgradeable is Administratable {
     event Upgrade(address indexed predecessor, address indexed successor);
@@ -18,6 +19,8 @@ contract Upgradeable is Administratable {
 
     function () payable public {
         // Require successfull delegate call
+
+        // solium-disable
         require(currentVersion.delegatecall(msg.data));
         assembly {
             let outsize := returndatasize

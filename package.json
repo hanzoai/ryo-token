@@ -12,7 +12,10 @@
     "solc": "0.4.23",
     "truffle-contract": "3.0.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "solium": "^1.1.7",
+    "solium-plugin-security": "^0.1.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,13 +32,16 @@
   "homepage": "https://github.com/hanzoai/ryo-token#readme",
   "eslintConfig": {
     "env": {
-        "node": true
+      "node": true
     },
     "parserOptions": {
-        "ecmaVersion": 8
+      "ecmaVersion": 8
     },
     "rules": {
-        "semi": [2, "never"]
+      "semi": [
+        2,
+        "never"
+      ]
     }
   }
 }
