@@ -1,38 +1,64 @@
-let Master  = artifacts.require('TestMaster')
-let Library = artifacts.require('TestLibrary')
+let Master  = artifacts.require('./test/Master.sol')
+let Library = artifacts.require('./test/Library.sol')
 
-contract('Upgradeable', async () => {
-  // Setup master/library contracts
-  let master = await Master.deployed()
-  let library = await Library.deployed()
-  await master.setVersion(library.address)
 
-  it('should upgrade version correctly', async () => {
-    let version = await master.currentVersion.call()
-    assert(version === library.address, 'Version is set to latest')
+contract('Ryo', async () => {
+  let master, library, proxy = null
+
+  // Setup master, library, proxy
+  before(async () => {
+    master = await Master.deployed()
+    library = await Library.deployed()
+    await master.setVersion(library.address)
+    proxy = await Library.at(master.address)
   })
 
-  it('should allow proxied methods', async () => {
-    let proxy = await Library.at(master.address)
-    let staticString = await proxy.staticString.call()
-    assert(staticString === 'bar', 'Unable to call staticString on upgradable contract')
-    let staticAddress = await proxy.staticAddress.call()
-    assert(staticAddress === '0xdcad3a6d3569df655070ded06cb7a1b2ccd1d3af', 'Unable to call staticAddress on upgradable contract')
-    let staticNumber = await proxy.staticNumber.call()
-    assert(staticNumber.toNumber() === 420, 'Unable to call staticNumber on upgradable contract')
-    let staticChoice = await proxy.staticChoice.call()
-    assert(staticChoice.toNumber() === 2, 'Unable to call staticChoice on upgradable contract')
-    let staticTwoStrings = await proxy.staticTwoStrings.call()
-    assert(staticTwoStrings[0] === 'foo', 'Failed to receive first element on staticTwoStrings on upgradable contract')
-    assert(staticTwoStrings[1] === 'bar', 'Failed to receive second element on staticTwoStrings on upgradable contract')
-    let staticTwoAddresses = await proxy.staticTwoAddresses.call()
-    assert(staticTwoAddresses[0] === '0xdcad3a6d3569df655070ded06cb7a1b2ccd1d3af', 'Failed to receive first element on staticTwoAddresses on upgradable contract')
-    assert(staticTwoAddresses[1] === '0x1c68f4f35ac5239650333d291e6ce7f841149937', 'Failed to receive second element on staticTwoAddresses on upgradable contract')
-    let staticTwoNumbers = await proxy.staticTwoNumbers.call()
-    assert(staticTwoNumbers[0].toNumber() === 420, 'Failed to receive first element on staticTwoNumbers on upgradable contract')
-    assert(staticTwoNumbers[1].toNumber()  === 404, 'Failed to receive second element on staticTwoNumbers on upgradable contract')
-    let staticMixed = await proxy.staticMixed.call()
-    assert(staticMixed[0].toNumber() === 420, 'Failed to receive first element on staticMixed on upgradable contract')
-    assert(staticMixed[1]  === 'bar', 'Failed to receive second element on staticMixed on upgradable contract')
+  it('should set version', async () => {
+    let v = await master.currentVersion.call()
+    assert(v === library.address, 'incorrect version of library contract returned')
+  })
+
+  it('should return static string from proxied method', async () => {
+    let v = await proxy.staticString.call()
+    assert.equal(v, 'bar', 'staticString() did not return expected string')
+  })
+
+  it('should return static address proxied method', async () => {
+    let v = await proxy.staticAddress.call()
+    assert(v === '0xdcad3a6d3569df655070ded06cb7a1b2ccd1d3af', 'staticAddress() did not return expected address')
+  })
+
+  it('should return static address from proxied method', async () => {
+    let v = await proxy.staticNumber.call()
+    assert(v.toNumber() === 42, 'staticNumber() did not return expected number')
+  })
+
+  it('should return static enum from proxied method', async () => {
+    let v = await proxy.staticEnum.call()
+    assert(v.toNumber() === 2, 'staticEnum() did not return expected enum')
+  })
+
+  it('should return static strings from proxied method', async () => {
+    let [one, two] = await proxy.staticStrings.call()
+    assert(one === 'foo', 'staticStrings() did not return expected string for first return value')
+    assert(two === 'bar', 'staticStrings() did not return expected string for second return value')
+  })
+
+  it('should return static addresses from proxied method', async () => {
+    let [one, two] = await proxy.staticAddresses.call()
+    assert(one === '0xdcad3a6d3569df655070ded06cb7a1b2ccd1d3af', 'staticAddresses() did not return expected address for first return value')
+    assert(two === '0x1c68f4f35ac5239650333d291e6ce7f841149937', 'staticAddresses() did not return expected address for second return value')
+  })
+
+  it('should return static numbers from proxied method', async () => {
+    let [one, two] = await proxy.staticNumbers.call()
+    assert(one.toNumber() === 42, 'staticNumbers() did not return expected number for first return value')
+    assert(two.toNumber()  === 43, 'staticNumbers() did not return expected number for first return value')
+  })
+
+  it('should return mixed values from proxied method', async () => {
+    let [num, str] = await proxy.staticMixed.call()
+    assert(num.toNumber() === 42, 'staticMixed() did not return expected number for first return value')
+    assert(str === 'bar', 'staticMixed() did not return expected string for second return value')
   })
 })

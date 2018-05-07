@@ -5,4 +5,4 @@ import "../Upgradeable.sol";
 
 // solium-disable
 // solhint-disable
-contract TestMaster is Upgradeable {}
+contract Master is Upgradeable {}

@@ -7,9 +7,9 @@
     "test": "test"
   },
   "dependencies": {
-    "npm": "6.0.0",
     "openzeppelin-solidity": "1.9.0",
-    "solc": "0.4.23",
+    "solc": "^0.4.23",
+    "truffle": "^4.1.8",
     "truffle-contract": "3.0.5"
   },
   "devDependencies": {
@@ -31,13 +31,23 @@
   },
   "homepage": "https://github.com/hanzoai/ryo-token#readme",
   "eslintConfig": {
+    "extends": "eslint:recommended",
     "env": {
       "node": true
+    },
+    "globals": {
+      "artifacts": true,
+      "assert": true,
+      "before": true,
+      "contract": true,
+      "it": true
     },
     "parserOptions": {
       "ecmaVersion": 8
     },
     "rules": {
+      "no-console": "off",
+      "indent": ["error", 2],
       "semi": [
         2,
         "never"
