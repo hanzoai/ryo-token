@@ -16,12 +16,12 @@ contract Administratable is Ownable {
 
     modifier onlyAdmins {
         if (msg.sender != owner && !admins[msg.sender]) revert();
-        return _;
+        _;
     }
 
     modifier onlyOwner {
         if (msg.sender != owner) revert();
-        return _;
+        _;
     }
 
     function totalAdminsMapping() public view returns (uint256) {
