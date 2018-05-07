@@ -1,14 +1,18 @@
 const Migrations = artifacts.require("./Migrations.sol") // Required by truffle
 
-const TestOwned      = "TestOwned.sol"
-const TestProxy      = "TestProxy.sol"
-const TestVersion    = "TestVersion.sol"
-const TestVersioned  = "TestVersioned.sol"
+const TestDelegate   = artifacts.require("./test/TestDelegate.sol")
+const TestOwned      = artifacts.require("./test/TestOwned.sol")
+const TestProxy      = artifacts.require("./test/TestProxy.sol")
+const TestVersion    = artifacts.require("./test/TestVersion.sol")
+const TestVersioned  = artifacts.require("./test/TestVersioned.sol")
 
 module.exports = (deployer) => {
-  deployer.deploy(Migrations)
-  deployer.deploy(TestOwned)
-  deployer.deploy(TestProxy)
-  deployer.deploy(TestVersion)
-  deployer.deploy(TestVersioned)
+  deployer.deploy([
+    Migrations,
+    TestDelegate,
+    TestOwned,
+    TestProxy,
+    TestVersion,
+    TestVersioned,
+  ])
 }
