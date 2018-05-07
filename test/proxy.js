@@ -1,21 +1,20 @@
-let Master  = artifacts.require('./test/Master.sol')
-let Library = artifacts.require('./test/Library.sol')
+let Proxy    = artifacts.require('./test/TestProxy.sol')
+let Delegate = artifacts.require('./test/TestDelegate.sol')
 
 
-contract('Ryo', async () => {
-  let master, library, proxy = null
+contract('Proxy', async () => {
+  let delegate, proxy = null
 
-  // Setup master, library, proxy
   before(async () => {
-    master = await Master.deployed()
-    library = await Library.deployed()
-    await master.setVersion(library.address)
-    proxy = await Library.at(master.address)
-  })
+    // Make sure our delegate and proxy are deployed
+    delegate = await Delegate.deployed()
+    proxy    = await Proxy.deployed()
 
-  it('should set version', async () => {
-    let v = await master.delegate.call()
-    assert(v === library.address, 'incorrect version of library contract returned')
+    // Update proxy to point to delegate contract
+    await proxy.setDelegate(delegate.address)
+
+    // Use Delegate's ABI with proxy's address
+    proxy = await Delegate.at(proxy.address)
   })
 
   it('should return static string from proxied method', async () => {

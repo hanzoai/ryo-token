@@ -5,4 +5,4 @@ import "../Versioned.sol";
 
 // solium-disable
 // solhint-disable
-contract Master is Versioned {}
+contract TestVersioned is Versioned {}

@@ -4,13 +4,19 @@ import "./Owned.sol";
 import "./Proxy.sol";
 
 
+interface Version {
+    function version() external pure returns (string);
+
+}
+
+
 contract Versioned is Owned, Proxy {
-    event Upgrade(address indexed predecessor, address indexed successor);
+    event Upgrade(string indexed version, address indexed predecessor, address indexed successor);
 
     // Update current version and store method configurations
-    function setVersion(address successor) public onlyOwner {
+    function setVersion(Version successor) public onlyOwner {
         address predecessor = delegate;
-        delegate = successor;
-        emit Upgrade(predecessor, successor);
+        delegate = address(successor);
+        emit Upgrade(successor.version(), predecessor, successor);
     }
 }

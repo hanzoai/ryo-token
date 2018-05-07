@@ -1,7 +1,7 @@
 pragma solidity 0.4.23;
 
 
-contract Library {
+contract TestDelegate {
     address constant private TEST_ADDRESS = 0xdCad3a6d3569DF655070DEd06cb7A1b2Ccd1D3AF;
     address constant private OTHER_ADDRESS = 0x1C68f4f35AC5239650333D291E6ce7f841149937;
 
