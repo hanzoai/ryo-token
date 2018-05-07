@@ -14,7 +14,7 @@ contract('Ryo', async () => {
   })
 
   it('should set version', async () => {
-    let v = await master.currentVersion.call()
+    let v = await master.delegate.call()
     assert(v === library.address, 'incorrect version of library contract returned')
   })
 

@@ -4,7 +4,7 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 
-contract Administratable is Ownable {
+contract Administered is Ownable {
     using SafeMath for uint256;
 
     address[] public adminsForIndex;

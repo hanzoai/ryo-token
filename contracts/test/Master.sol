@@ -1,8 +1,8 @@
 pragma solidity 0.4.23;
 
-import "../Upgradeable.sol";
+import "../Versioned.sol";
 
 
 // solium-disable
 // solhint-disable
-contract Master is Upgradeable {}
+contract Master is Versioned {}
