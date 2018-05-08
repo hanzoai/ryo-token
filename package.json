@@ -26,9 +26,16 @@
     "type": "git",
     "url": "git+https://github.com/hanzoai/ryo-token.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "contracts",
+    "ethereum",
+    "hanzo",
+    "smart",
+    "solidity",
+    "web3"
+  ],
+  "author": "Hanzo, Inc <hi@hanzo.ai> (https://hanzo.ai)",
+  "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/hanzoai/ryo-token/issues"
   },
