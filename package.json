@@ -1,6 +1,6 @@
 {
   "name": "ryo-token",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Smart contract code for RYO token",
   "main": "truffle.js",
   "directories": {
