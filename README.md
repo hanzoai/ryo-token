@@ -1,3 +1,5 @@
+<p align="center"><img src=".github/hero.svg" alt="ryo-token" width="880"></p>
+
 # Ryo
 
 [![npm][npm-img]][npm-url]
