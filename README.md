@@ -23,7 +23,7 @@ powered by [Hanzo](https://hanzo.ai) and [Coin.js](https://github.com/hanzoai/co
 develop decentralized applications and deliver compelling experiences.
 
 ## License
-[BSD][license-url]
+Licensed under [MIT](LICENSE-MIT) or [Apache-2.0](LICENSE-APACHE), at your option — per HIP-0137.
 
 [hanzo]:            https://hanzo.ai
 [solidity]:         https://solidity.readthedocs.io

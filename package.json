@@ -37,7 +37,7 @@
     "web3"
   ],
   "author": "Hanzo, Inc <hi@hanzo.ai> (https://hanzo.ai)",
-  "license": "BSD-3-Clause",
+  "license": "MIT OR Apache-2.0",
   "bugs": {
     "url": "https://github.com/hanzoai/ryo-token/issues"
   },
